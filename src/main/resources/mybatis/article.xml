@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.douzone.repository.ArticleRepository">
+	<select id="list" resultType="com.douzone.dto.ArticleDTO$ListResponse">
+		select `id`, `title`, `userId` from `article` order by `createdAt` desc limit 10;
+	</select>
+	<select id="findById" resultType="com.douzone.entity.Article">
+		select * from `article` where `id`=#{id}
+	</select>
+	<insert id="insert">
+		insert into `article` (`title`, `content`, `userId`) values (#{articleDTO.title}, #{articleDTO.content}, #{userId})
+	</insert>
+	<update id="update">
+		update `article` set `title`=#{articleDTO.title}, `content`=#{articleDTO.content} where `id` = #{articleId}
+	</update>
+	<delete id="delete">
+		delete from `article` where `id`=#{id}
+	</delete>
+</mapper>
